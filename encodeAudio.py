@@ -36,10 +36,11 @@ def aacEncode(filePath):
     )
     sp.run(
         shlex.split(
-            f"qaac \"{os.path.splitext(filePath)[0]}.wav\" -V 127 --no-delay \"{os.path.splitext(filePath)[0]}.m4a\""
+            f"qaac \"{os.path.splitext(filePath)[0]}.wav\" -V 127 --no-delay -o \"{os.path.splitext(filePath)[0]}.m4a\""
         )
     )
-    os.remove(f"{os.path.splitext(filePath)[0]}.wav")
+    if os.path.exists(f"{os.path.splitext(filePath)[0]}.wav"):
+        os.remove(f"{os.path.splitext(filePath)[0]}.wav")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -52,8 +53,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.path == None:
-        print(f"[ERROR] Usage: python {sys.argv[0]} -ARG/--arg path")
-        sys.exit(1)
+        print(f"[WARNING] Usage: python {sys.argv[0]} -ARG/--arg path\n[INFO] Setting path to the current directory.")
+        args.path = os.getcwd()
 
     if args.wav:
         if os.path.isfile(args.path):
@@ -62,7 +63,7 @@ if __name__ == "__main__":
             else:
                 wavEncode(args.path)
         else:
-            if args.recurcive:
+            if args.recursive:
                 fileList = glob.glob(f"{args.path}/**/*", recursive=True)
             else:
                 fileList = glob.glob(f"{args.path}/*")
@@ -77,7 +78,7 @@ if __name__ == "__main__":
         if os.path.isfile(args.path):
             flacEncode(args.path)
         else:
-            if args.recurcive:
+            if args.recursive:
                 fileList = glob.glob(f"{args.path}/**/*", recursive=True)
             else:
                 fileList = glob.glob(f"{args.path}/*")
@@ -89,7 +90,7 @@ if __name__ == "__main__":
         if os.path.isfile(args.path):
             aacEncode(args.path)
         else:
-            if args.recurcive:
+            if args.recursive:
                 fileList = glob.glob(f"{args.path}/**/*", recursive=True)
             else:
                 fileList = glob.glob(f"{args.path}/*")
