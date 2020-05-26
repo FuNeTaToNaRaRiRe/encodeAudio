@@ -13,9 +13,9 @@ Some scripts to make audio encoding easier.
 
 python encodeAudio.py --arg path.
 
--W or --wav  -> Use this if you need to convert audio from a .m2ts file.
--F or --flac -> Use this to convert .wav file to .flac.
--A or --aac  -> Use this to convert .wav and .flac file to .m4a.
+- -W or --wav  -> Use this if you need to convert audio from a .m2ts file.
+- -F or --flac -> Use this to convert .wav file to .flac.
+- -A or --aac  -> Use this to convert .wav and .flac file to .m4a.
 
 ## Licensing
 
