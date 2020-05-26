@@ -59,7 +59,8 @@ if __name__ == "__main__":
         if os.path.isfile(args.path):
             if args.track:
                 wavEncode2(args.path, args.track)
-            wavEncode(args.path)
+            else:
+                wavEncode(args.path)
         else:
             if args.recurcive:
                 fileList = glob.glob(f"{args.path}/**/*", recursive=True)
@@ -67,7 +68,10 @@ if __name__ == "__main__":
                 fileList = glob.glob(f"{args.path}/*")
             for audioFile in fileList:
                 if audioFile.endswith(extensionsTuple[0]):
-                    wavEncode(audioFile)
+                    if args.track:
+                        wavEncode2(audioFile, args.track)
+                    else:
+                        wavEncode(audioFile)
 
     if args.flac:
         if os.path.isfile(args.path):
