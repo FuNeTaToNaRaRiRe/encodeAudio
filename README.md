@@ -20,7 +20,3 @@ python encodeAudio.py --arg path.
 ## Licensing
 
 - MIT
-
-## TODO
-
-- Ask user to specify track number for .m2ts file (it converts only the first audio by default).
